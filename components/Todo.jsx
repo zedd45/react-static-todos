@@ -7,10 +7,10 @@ export default function Todo ({ content, deleteCallback, isDone }) {
 
   return (
     <li className={`list-group-item ${itemClassModifier}`}>
-      <i className="glyphicon glyphicon-ok"></i>
+      { isDone && <i className="glyphicon glyphicon-ok"></i> }
       <span className="list-item-text">{content}</span>
       <div className="button-group pull-right">
-        <button title="delete item" type="button" className="btn btn-xs btn-link">
+        <button onClick={deleteCallback} title="delete item" type="button" className="btn btn-xs btn-link">
           <i className="glyphicon glyphicon-remove"></i>
         </button>
       </div>

@@ -1,19 +1,26 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Todo from './Todo.jsx';
-
-const deleteCallback = (list, removalIndex) => {
-
-  return list.splice(removalIndex, 1);
-}
+import { deleteTodo } from '../actions';
 
 
-export default function TodoList ({ todos }) {
+const mapStateToProps = (state) => {
+
+  return { todos: state.todos };
+};
+
+const mapDispatchToProps = () => {
+
+  return { }
+};
+
+export function TodoList (todos) {
 
   return (
     <ul className="list-group">
       {todos.map((todo, index) => {
 
-        return (<Todo {...todo} deleteCallback={deleteCallback.bind(todos, index)} key={index} />);
+        return (<Todo {...todo} index={index} key={index} />);
       })}
     </ul>
   );
@@ -22,3 +29,5 @@ export default function TodoList ({ todos }) {
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -8,23 +8,13 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import TodoList from '../../components/TodoList.jsx';
 
-class HomePage extends React.Component {
+class HomePage extends Component {
 
   static propTypes = {
     todoList: PropTypes.arrayOf(PropTypes.object),
-  };
-
-  static defaultProps = {
-    todoList: [{
-      content: 'play with react static',
-      isDone: true,
-    }, {
-      content: 'master todos',
-      isDone: true,
-    }],
   };
 
   componentDidMount() {
@@ -40,7 +30,7 @@ class HomePage extends React.Component {
           <TodoList todos={this.props.todoList} />
           <form className="form-inline">
             <input className="form-control" type="text" name="new-item" />
-            <input classNameName="btn btn-primary" type="submit" value="Add Item" />
+            <input className="btn btn-primary" type="submit" value="Add Item" />
           </form>
         </fieldset>
       </div>
