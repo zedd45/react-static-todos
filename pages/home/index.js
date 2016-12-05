@@ -9,35 +9,43 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import TodoList from '../../components/TodoList.jsx';
+import { connect } from 'react-redux';
 
-class HomePage extends Component {
+import TodoList from '../../components/TodoList.jsx';
+import AddTodoForm from '../../components/AddTodoForm.jsx';
+
+
+const mapStateToProps = (state) => {
+
+  return { todoList: state.todos };
+};
+
+export class HomePage extends Component {
 
   static propTypes = {
     todoList: PropTypes.arrayOf(PropTypes.object),
   };
 
   componentDidMount() {
+
     document.title = 'React Static Todo App';
   }
 
   render () {
+
     return (
       <div className="container-fluid" style={{ marginTop: '2px' }}>
-      <div className="todo-list-panel col-md-8 col-md-offset-2">
-        <fieldset>
-          <legend>My TODO List</legend>
-          <TodoList todos={this.props.todoList} />
-          <form className="form-inline">
-            <input className="form-control" type="text" name="new-item" />
-            <input className="btn btn-primary" type="submit" value="Add Item" />
-          </form>
-        </fieldset>
+        <div className="todo-list-panel col-md-8 col-md-offset-2">
+          <fieldset>
+            <legend>My TODO List</legend>
+            <TodoList todos={this.props.todoList} />
+            <AddTodoForm />
+          </fieldset>
+        </div>
       </div>
-    </div>
     );
   }
 
 }
 
-export default HomePage;
+export default connect(mapStateToProps)(HomePage);

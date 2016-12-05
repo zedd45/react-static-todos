@@ -9,10 +9,8 @@
  */
 
 import { createStore } from 'redux';
-import todos from '../reducers';
-
-const defaultState = { todos: [] };
+import todos, { initialState } from '../reducers';
 
 // Centralized application state
 // For more information visit http://redux.js.org/
-export default createStore(todos, state = defaultState);
+export default createStore(todos, initialState);

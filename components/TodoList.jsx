@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = () => {
 
-  return { }
+  return { deleteTodo };
 };
 
 export function TodoList (todos) {
@@ -20,7 +20,7 @@ export function TodoList (todos) {
     <ul className="list-group">
       {todos.map((todo, index) => {
 
-        return (<Todo {...todo} index={index} key={index} />);
+        return (<Todo {...todo} deleteCallback={deleteTodo.bind(index)} index={index} key={index} />);
       })}
     </ul>
   );
