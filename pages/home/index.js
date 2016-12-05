@@ -9,34 +9,42 @@
  */
 
 import React, { PropTypes } from 'react';
-import Layout from '../../components/Layout';
-import s from './styles.css';
-import { title, html } from './index.md';
+import TodoList from '../../components/TodoList.jsx';
 
 class HomePage extends React.Component {
 
   static propTypes = {
-    articles: PropTypes.array.isRequired,
+    todoList: PropTypes.arrayOf(PropTypes.object),
+  };
+
+  static defaultProps = {
+    todoList: [{
+      content: 'play with react static',
+      isDone: true,
+    }, {
+      content: 'master todos',
+      isDone: true,
+    }],
   };
 
   componentDidMount() {
-    document.title = title;
+    document.title = 'React Static Todo App';
   }
 
-  render() {
+  render () {
     return (
-      <Layout className={s.content}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-        <h4>Articles</h4>
-        <ul>
-          {this.props.articles.map((article, i) =>
-            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li>
-          )}
-        </ul>
-        <p>
-          <br /><br />
-        </p>
-      </Layout>
+      <div className="container-fluid" style={{ marginTop: '2px' }}>
+      <div className="todo-list-panel col-md-8 col-md-offset-2">
+        <fieldset>
+          <legend>My TODO List</legend>
+          <TodoList todos={this.props.todoList} />
+          <form className="form-inline">
+            <input className="form-control" type="text" name="new-item" />
+            <input classNameName="btn btn-primary" type="submit" value="Add Item" />
+          </form>
+        </fieldset>
+      </div>
+    </div>
     );
   }
 
