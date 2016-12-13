@@ -11,7 +11,7 @@ const mapDispatchToProps = () => {
 export class AddTodoForm extends Component {
 
   static propTypes = {
-    addTodo: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   };
 
   constructor (props) {
@@ -38,7 +38,8 @@ export class AddTodoForm extends Component {
   handleSubmit () {
 
     const { value } = this.state;
-    this.props.addTodo({ content: value });
+    this.props.dispatch(addTodo({ content: value }));
+    this.setState({ value: '' });
   }
 
   render () {
@@ -52,4 +53,4 @@ export class AddTodoForm extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddTodoForm);
+export default connect()(AddTodoForm);

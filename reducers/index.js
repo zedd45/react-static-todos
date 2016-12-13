@@ -5,23 +5,23 @@ export const initialState = { todos: [] };
 
 export default function todos (state = initialState, action) {
 
-  switch (action) {
+  switch (action.type) {
 
     case ADD_TODO:
 
       return Object.assign({}, state,
-        { todos: state.todos.concat([action.todo]) }
+        { todos: state.todos.concat([action.payload]) }
       );
 
     case DELETE_TODO:
 
       return Object.assign({}, state,
-        { todos: state.todos.splice(action.index, 1) }
+        { todos: state.todos.splice(action.payload.index, 1) }
       );
 
     case TOGGLE_TODO_DONE: {
 
-      const item = state.todos[action.index];
+      const item = state.todos[action.payload.index];
 
       return Object.assign({}, state,
         { todos: state.todos.splice(action.index, 1, Object.assign({}, item, { isDone: !item.isDone })) }
