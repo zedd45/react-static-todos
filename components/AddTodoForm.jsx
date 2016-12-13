@@ -3,11 +3,6 @@ import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
 
-const mapDispatchToProps = () => {
-
-  return { addTodo };
-};
-
 export class AddTodoForm extends Component {
 
   static propTypes = {

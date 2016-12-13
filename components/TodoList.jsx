@@ -9,12 +9,18 @@ const mapStateToProps = (state) => {
   return { todos: state.todos };
 };
 
-const mapDispatchToProps = () => {
+function dispatchDelete(dispatch, index) {
 
-  return { deleteTodo };
-};
+  return dispatch(deleteTodo(index));
+}
 
-export function TodoList ({ todos }) {
+function dispatchToggle(dispatch, index) {
+
+  return dispatch(toggleTodoDone(index));
+}
+
+
+export function TodoList ({ dispatch, todos }) {
 
   return (
     <ul className="list-group">
@@ -23,8 +29,8 @@ export function TodoList ({ todos }) {
         return (
           <Todo
             {...todo}
-            deleteCallback={deleteTodo.bind(null, index)}
-            markDone={toggleTodoDone.bind(null, index)}
+            deleteCallback={dispatchDelete.bind(null, dispatch, index)}
+            markDone={dispatchToggle.bind(null, dispatch, index)}
             index={index}
             key={index}
           />
@@ -35,7 +41,12 @@ export function TodoList ({ todos }) {
 }
 
 TodoList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+TodoList.defaultProps = {
+  todos: [],
+};
+
+export default connect(mapStateToProps)(TodoList);

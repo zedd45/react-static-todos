@@ -22,19 +22,24 @@ export default function todos (state = initialState, action) {
         todos: state.todos.concat([Object.assign({}, { content: action.payload.content, isDone: false })])
       });
 
-    case DELETE_TODO:
+    case DELETE_TODO: {
 
-      return Object.assign({}, state,
-        { todos: state.todos.splice(action.payload.index, 1) }
-      );
+      const todos = [].concat(state.todos);
+      todos.splice(action.payload.index, 1);
+
+      return Object.assign({}, state, { todos });
+    }
 
     case TOGGLE_TODO_DONE: {
 
-      const item = state.todos[action.payload.index];
+      const targetIndex = action.payload.index;
+      const item = state.todos[targetIndex];
+      const revisedItem = Object.assign({}, item, { isDone: !item.isDone });
+      const todos = [].concat(state.todos);
 
-      return Object.assign({}, state,
-        { todos: state.todos.splice(action.index, 1, Object.assign({}, item, { isDone: !item.isDone })) }
-      );
+      todos[targetIndex] = revisedItem;
+
+      return Object.assign({}, state, { todos });
     }
 
     default:
