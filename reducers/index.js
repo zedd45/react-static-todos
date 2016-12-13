@@ -1,7 +1,16 @@
 import { ADD_TODO, DELETE_TODO, TOGGLE_TODO_DONE } from '../actions';
 
 
-export const initialState = { todos: [] };
+export const initialState = {
+  todos: [{
+    content: 'take out the trash',
+    isDone: true,
+  },
+  {
+    content: 'play ball with the dog',
+    isDone: false, // never.  It's never ending.  Where does he get all the energy (but I love it)
+  }],
+};
 
 export default function todos (state = initialState, action) {
 
@@ -9,9 +18,9 @@ export default function todos (state = initialState, action) {
 
     case ADD_TODO:
 
-      return Object.assign({}, state,
-        { todos: state.todos.concat([action.payload]) }
-      );
+      return Object.assign({}, state, {
+        todos: state.todos.concat([Object.assign({}, { content: action.payload.content, isDone: false })])
+      });
 
     case DELETE_TODO:
 
