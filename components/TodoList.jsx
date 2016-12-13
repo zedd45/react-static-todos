@@ -14,7 +14,7 @@ const mapDispatchToProps = () => {
   return { deleteTodo };
 };
 
-export function TodoList (todos) {
+export function TodoList ({ todos }) {
 
   return (
     <ul className="list-group">

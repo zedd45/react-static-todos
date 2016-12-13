@@ -24,6 +24,7 @@ let routes = require('./routes.json'); // Loaded with utils/routes-loader.js
 const container = document.getElementById('container');
 
 function renderComponent(component) {
+
   ReactDOM.render(<Provider store={store}>{component}</Provider>, container);
 }
 
@@ -32,7 +33,7 @@ function renderComponent(component) {
 function render(location) {
   router.resolve(routes, location)
     .then(renderComponent)
-    .catch(error => router.resolve(routes, { ...location, error }).then(renderComponent));
+    .catch(error => console.error(error.stack));
 }
 
 // Handle client-side navigation by using HTML5 History API
